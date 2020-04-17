@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,900" rel="stylesheet" type="text/css">
+    <!-- <script src="https://kit.fontawesome.com/e7aebeadc5.js" crossorigin="anonymous"></script> -->
+    <title>Cipher - Vigenere Cipher</title>
+    <link rel="stylesheet" href="basic.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>This is a Vigenere cipher HTML.</h1>
+        <p>Note: input text should be small letters and no spaces</p>
+      </header>
+    <!-- <h4>Check the console for result.</h4> -->
+    <div class="plain-text">
+      <label for="">Enter your text here[small letters]: </label>
+      <input type="text" name="plain" value="" id='input'>
+    </div>
+    <div class="key">
+      <label for="">Enter your key here[small letters]: </label>
+      <input type="password" name="key" value="" id="key">
+      <!-- <i class="far fa-eye-slash"></i><i class="far fa-eye"></i> -->
+    </div>
+    <div class="buttons">
+      <button type="button" name="button" onclick="encrypt()">Encrypt</button>
+      <button type="button" name="button" onclick="decrypt()">Decrypt</button>
+    </div>
+    <div class="out">
+      <span>output:</span>
+      <div class="output" id="output"></div>
+    </div>
+  </div>
+  </body>
+  <script src="js/vigenere.js"></script>
+</html>

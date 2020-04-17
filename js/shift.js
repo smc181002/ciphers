@@ -9,15 +9,25 @@ let encrypt = () => {
     return 0;
   }
   inpText.split('').forEach((item, i) => {
+
     if (item == ' '){
       document.getElementById('output').innerHTML += ' ';
     }
     else{
-      convertText = (item.charCodeAt(0) + Number(isKey));
-      if (convertText > 'z'.charCodeAt(0)){
-        convertText -= 26;
+      if (item.charCodeAt(0)>=97) {
+        convertText = (item.charCodeAt(0) + Number(isKey));
+        if (convertText > 'z'.charCodeAt(0)){
+          convertText -= 26;
+        }
+        document.getElementById('output').innerHTML += String.fromCharCode(convertText);
       }
-      document.getElementById('output').innerHTML += `${String.fromCharCode(convertText)}`;
+      else {
+        convertText = (item.charCodeAt(0) + Number(isKey));
+        if (convertText > 'Z'.charCodeAt(0)){
+          convertText -= 26;
+        }
+        document.getElementById('output').innerHTML += String.fromCharCode(convertText);
+      }
     }
   });
 }
@@ -35,11 +45,21 @@ let decrypt = () => {
       document.getElementById('output').innerHTML += ' ';
     }
     else{
-      convertText = (item.charCodeAt(0) - Number(isKey));
-      if (convertText < 'a'.charCodeAt(0)){
-        convertText += 26;
+      if (item.charCodeAt(0)<=97) {
+        convertText = (item.charCodeAt(0) - Number(isKey));
+        if (convertText < 'A'.charCodeAt(0)){
+          convertText += 26;
+        }
+        document.getElementById('output').innerHTML += `${String.fromCharCode(convertText)}`;
       }
-      document.getElementById('output').innerHTML += `${String.fromCharCode(convertText)}`;
+      else {
+        convertText = (item.charCodeAt(0) - Number(isKey));
+        if (convertText < 'a'.charCodeAt(0)){
+          convertText += 26;
+        }
+        document.getElementById('output').innerHTML += `${String.fromCharCode(convertText)}`;
+      }
+
     }
   });
 }

@@ -1,30 +1,6 @@
-encrypt = () => {
-  let inpText = document.getElementById('input').value;
-  let isKey = document.getElementById('key').value;
-  let valAdd;
-  let isVar = [''];
-  let aVar = '';
-  document.getElementById('output').innerHTML = '';
-  if (isKey == '' || inpText == ''){
-    document.getElementById('output').innerHTML = 'Enter the input correctly';
-    return 0;
-  }
-  if (inpText.length%isKey.length !=0){
-    valAdd = isKey.length -  inpText.length%isKey.length;
-    for (let i = 0; i < valAdd; i++) {
-      inpText += '$';
-    }
-  }
-  for (let i=0; i<inpText.length/isKey.length; i++){
-    for (let j=0; j<isKey.length; j++){
-      isVar[(Number(isKey[j]-1)+(isKey.length*i))] = inpText[j+(isKey.length*i)];
-    }
-  }
-  aVar = isVar.toString();
-  document.getElementById('output').innerHTML = aVar.replace(/\,/g,'');
-}
+let convertText='';
 
-decrypt = () => {
+let encrypt = () => {
   let inpText = document.getElementById('input').value;
   let isKey = document.getElementById('key').value;
   let valAdd;
@@ -34,17 +10,37 @@ decrypt = () => {
     document.getElementById('output').innerHTML = 'Enter the input correctly';
     return 0;
   }
-  if (inpText.length%isKey.length !=0){
-    valAdd = isKey.length -  inpText.length%isKey.length;
-    for (let i = 0; i < valAdd; i++) {
-      inpText += '$';
+  for (let i=0; i<inpText.length/isKey.length; i++){
+    for (let j=0; j<isKey.length; j++){
+      convertText = Number(inpText[j + i*isKey.length].charCodeAt(0)) + Number(isKey[j].charCodeAt(0)-96);
+      if (convertText > 'z'.charCodeAt(0)){
+        convertText -= 26;
+      }
+      document.getElementById('output').innerHTML += String.fromCharCode(convertText);
     }
+  }
+}
+
+let decrypt = () => {
+  let inpText = document.getElementById('input').value;
+  let isKey = document.getElementById('key').value;
+  let valAdd;
+  let isVar = '';
+  document.getElementById('output').innerHTML = '';
+  if (isKey == '' || inpText == ''){
+    document.getElementById('output').innerHTML = 'Enter the input correctly';
+    return 0;
   }
   for (let i=0; i<inpText.length/isKey.length; i++){
     for (let j=0; j<isKey.length; j++){
-      isVar += inpText[(Number(isKey[j]-1)+(isKey.length*i))];
+      convertText = Number(inpText[j + i*isKey.length].charCodeAt(0)) - Number(isKey[j].charCodeAt(0)) + 96;
+      // console.log(inpText[j + i*isKey.length].charCodeAt(0));
+      // console.log(convertText);
+      if (convertText < 'a'.charCodeAt(0)){
+        convertText += 26;
+      }
+      // console.log('>' + convertText);
+      document.getElementById('output').innerHTML += String.fromCharCode(convertText);
     }
   }
-  document.getElementById('output').innerHTML = isVar;
-  console.log(isVar);
 }
